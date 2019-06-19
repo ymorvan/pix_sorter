@@ -1,1 +1,3 @@
-python-magic
+file-magic
+pillow
+pyexiftool
