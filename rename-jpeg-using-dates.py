@@ -57,8 +57,8 @@ def path_name(outdir, year, month, prev_fname, new_fname):
         return absolute_new_path_name, absolute_new_fname
 
 def copy_rename_file(outdir, year, month, prev_fname, new_fname):
+    new_fname = new_fname.lower()
     absolute_new_path_name, absolute_new_fname = path_name(args.outdir, year, month, prev_fname, new_fname)
-    absolute_new_fname = absolute_new_fname.lower()
     print('absolute_new_path_name ', absolute_new_path_name)
     print('absolute_new_path_name ', absolute_new_fname)
     # XXXXXXXXXXXX check path first, if not existYYYYYYYYYYYY then check file
@@ -78,6 +78,7 @@ def main(args):
     for current_fname in onlyfiles:
         mime_type = magic.detect_from_filename(current_fname).mime_type
         if 'jpeg' in mime_type or 'quicktime' in mime_type or 'mp4' in mime_type:
+            print("Previous file name ", current_fname)
             exif_mime_type_key = exif_key(mime_type);
             new_fname, year, month  = name_from_exif(current_fname, exif_mime_type_key)
             copy_rename_file(args.outdir, year, month, current_fname, new_fname)
